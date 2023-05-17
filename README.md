@@ -16,7 +16,7 @@ client.start()
 async def main():
     user_id, chat_id = 123, 456
     await client.send_message(chat_id, f"{user_id}, send your prompt!")
-    prompt_message = client.listen_message(
+    prompt_message = await client.listen_message(
         chat_id=chat_id,
         filters=filters.user(user_id)
     )
