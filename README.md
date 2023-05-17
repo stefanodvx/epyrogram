@@ -10,10 +10,12 @@ All you need to do is just import epyrogram custom Client and use it like a regu
 from epyrogram import Client
 from pyrogram import filters
 
+import asyncio
+
 client = Client("bot", api_id=123, api_hash="abc", ...)
-client.start()
 
 async def main():
+    await client.start()
     user_id, chat_id = 123, 456
     await client.send_message(chat_id, f"{user_id}, send your prompt!")
     prompt_message = await client.listen_message(
@@ -21,6 +23,7 @@ async def main():
         filters=filters.user(user_id)
     )
     await client.send_message(chat_id, f"{user_id}, your prompt is: {prompt_message.text}")
+    await client.stop()
 
-client.stop()
+asyncio.run(main())
 ```
