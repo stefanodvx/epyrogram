@@ -19,7 +19,7 @@ class Client(pyrogram.Client):
 
         self._listeners = {}
 
-    async def listen(
+    async def listen_message(
         self,
         chat_id: Union[int, str],
         timeout: int = 120,
@@ -29,7 +29,25 @@ class Client(pyrogram.Client):
         future = asyncio.get_running_loop().create_future()
         self._listeners[uuid] = {
             "filters": filters & pyrogram.filters.chat(chat_id),
-            "future": future
+            "future": future,
+            "type": Message
+        }
+        future.add_done_callback(lambda _: self._listeners.pop(uuid, None))
+        await asyncio.wait_for(future, timeout=timeout)
+        return future
+    
+    async def listen_callback_query(
+        self,
+        chat_id: Union[int, str],
+        timeout: int = 120,
+        filters: pyrogram.filters.Filter = None,
+        uuid: str = uuid4().hex
+    ):
+        future = asyncio.get_running_loop().create_future()
+        self._listeners[uuid] = {
+            "filters": filters & pyrogram.filters.chat(chat_id),
+            "future": future,
+            "type": CallbackQuery
         }
         future.add_done_callback(lambda _: self._listeners.pop(uuid, None))
         await asyncio.wait_for(future, timeout=timeout)
