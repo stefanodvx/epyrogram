@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.1",
     author="stefanodvx",
     author_email="pp.stefanodvx@gmail.com",
-    description="EPyrogram: extends the functionality of Pyrogram by enhancing it with new features.",
+    description="EPyrogram: extend the functionality of Pyrogram by enhancing it with new features.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/stefanodvx/epyrogram",

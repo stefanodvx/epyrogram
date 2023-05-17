@@ -1,6 +1,6 @@
 from pyrogram.types import Message, CallbackQuery
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
-from typing import Union
+from typing import Union, Optional
 from uuid import uuid4
 
 import pyrogram
@@ -25,7 +25,7 @@ class Client(pyrogram.Client):
         timeout: int = 120,
         filters: pyrogram.filters.Filter = None,
         uuid: str = uuid4().hex
-    ):
+    ) -> Optional[Message]:
         future = asyncio.get_running_loop().create_future()
         self._listeners[uuid] = {
             "filters": filters & pyrogram.filters.chat(chat_id),
@@ -34,7 +34,12 @@ class Client(pyrogram.Client):
         }
         future.add_done_callback(lambda _: self._listeners.pop(uuid, None))
         await asyncio.wait_for(future, timeout=timeout)
-        return future
+        try:
+            message = await future
+            return message
+        except asyncio.TimeoutError:
+            future.cancel()
+            raise
     
     async def listen_callback_query(
         self,
@@ -42,7 +47,7 @@ class Client(pyrogram.Client):
         timeout: int = 120,
         filters: pyrogram.filters.Filter = None,
         uuid: str = uuid4().hex
-    ):
+    ) -> Optional[CallbackQuery]:
         future = asyncio.get_running_loop().create_future()
         self._listeners[uuid] = {
             "filters": filters & pyrogram.filters.chat(chat_id),
@@ -51,7 +56,12 @@ class Client(pyrogram.Client):
         }
         future.add_done_callback(lambda _: self._listeners.pop(uuid, None))
         await asyncio.wait_for(future, timeout=timeout)
-        return future
+        try:
+            message = await future
+            return message
+        except asyncio.TimeoutError:
+            future.cancel()
+            raise
 
     async def _handlers_listener(
         self,
