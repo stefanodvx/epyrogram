@@ -43,4 +43,4 @@ Work in progress...
 Contributions to EPyrogram are welcome! If you have any bug reports, feature requests, or pull requests, please open an issue on the GitHub repository.
 
 ## Acknowledgements
-EPyrofrap is based on the original Pyrogram library developed by [Dan](https://github.com/delivrance) and its contributors.
+EPyrogram is based on the original Pyrogram library developed by [Dan](https://github.com/delivrance) and its contributors.
