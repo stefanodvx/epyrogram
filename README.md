@@ -10,7 +10,7 @@ pip install git+https://github.com/stefanodvx/epyrogram@main
 ```
 
 ## Features
-EPyrogram provides a **custom Client** class that can be used just like the regular Pyrogram Client. It adds new methods and functionalities while maintaining compatibility with existing Pyrogram code. This means that EPyrogram will always **rely on your original Pyrogr installation** and will be always up-to-date!
+EPyrogram provides a **custom Client** class that can be used just like the regular Pyrogram Client. It adds new methods and functionalities while maintaining compatibility with existing Pyrogram code. This means that EPyrogram will always **rely on your original Pyrogram installation** and will always be up-to-date!
 
 ## Example Code
 ```python3
