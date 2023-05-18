@@ -43,14 +43,13 @@ class Client(pyrogram.Client):
     
     async def listen_callback_query(
         self,
-        chat_id: Union[int, str],
         timeout: int = 120,
         filters: pyrogram.filters.Filter = None,
         uuid: str = uuid4().hex
     ) -> Optional[CallbackQuery]:
         future = asyncio.get_running_loop().create_future()
         self._listeners[uuid] = {
-            "filters": filters & pyrogram.filters.chat(chat_id),
+            "filters": filters,
             "future": future,
             "type": CallbackQuery
         }
