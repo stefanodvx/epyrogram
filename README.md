@@ -15,13 +15,12 @@ EPyrogram provides a **custom Pyrogram Client** that can be used just like the r
 ## Example Code
 ```python3
 from pyrogram import Client, filters
+from epyrogram import patch
 
-import epyrogram
 import asyncio
 
 # epyrogram.patch will return a custom Client instance
-base_client = Client("bot", api_id=123, api_hash="abc", ...)
-client = epyrogram.patch(base_client)
+client = patch(Client("bot", api_id=123, api_hash="abc", ...))
 
 user_id, chat_id = 123, 456
 
