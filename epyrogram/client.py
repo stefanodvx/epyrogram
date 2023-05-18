@@ -7,12 +7,12 @@ import pyrogram
 import asyncio
 import logging
 
-class Client(pyrogram.Client):
+class EClient(pyrogram.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.logger = logging.getLogger("pyrogram.epyrogram.client")
-        self.logger.debug("Client patched.")
+        self._logger = logging.getLogger("pyrogram.epyrogram.client")
+        self._logger.debug("Client patched.")
 
         for handler in (MessageHandler, CallbackQueryHandler):
             self.dispatcher.add_handler(handler(self._handlers_listener), -999)

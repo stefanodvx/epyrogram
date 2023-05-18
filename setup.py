@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="epyrogram",
-    version="0.0.1",
+    version="0.0.2",
     author="stefanodvx",
     author_email="pp.stefanodvx@gmail.com",
     description="EPyrogram: extend the functionality of Pyrogram by enhancing it with new features.",

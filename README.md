@@ -10,17 +10,20 @@ pip install git+https://github.com/stefanodvx/epyrogram@main
 ```
 
 ## Features
-EPyrogram provides a **custom Client** class that can be used just like the regular Pyrogram Client. It adds new methods and functionalities while maintaining compatibility with existing Pyrogram code. This means that EPyrogram will always **rely on your original Pyrogram installation** and will always be up-to-date!
+EPyrogram provides a **custom Pyrogram Client** that can be used just like the regular Pyrogram Client. It adds new methods and functionalities while maintaining compatibility with existing Pyrogram code. This means that EPyrogram will always **rely on your original Pyrogram installation** and will always be up-to-date!
 
 ## Example Code
 ```python3
-from epyrogram import Client
-from pyrogram import filters
+from pyrogram import Client, filters
 
+import epyrogram
 import asyncio
 
-client = Client("bot", api_id=123, api_hash="abc", ...)
+# epyrogram.patch will return a custom Client instance
+base_client = Client("bot", api_id=123, api_hash="abc", ...)
+client = epyrogram.patch(base_client)
 
+# Use the new Client just like a normal Pyrogram client
 async def main():
     await client.start()
     user_id, chat_id = 123, 456
@@ -34,7 +37,7 @@ async def main():
 
 asyncio.run(main())
 ```
-*In this example, the EPyrogram Client is used to create a bot client. It starts the client, sends a prompt message to a specific chat, listens for a response from a specific user, and sends another message with the received prompt.*
+*In this example, the EPyrogram `patch` function is used to create a bot client. It starts the client, sends a prompt message to a specific chat, listens for a response from a specific user, and sends another message with the received prompt.*
 
 ## Documentation
 Work in progress...
