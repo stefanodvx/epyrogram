@@ -1,8 +1,8 @@
-from .client import EClient
+from .client import Client
 
 import pyrogram
 
-def patch(client: pyrogram.Client) -> EClient:
+def patch(client: pyrogram.Client) -> Client:
 
     if not isinstance(client, pyrogram.Client):
         raise TypeError("You did not provide any Pyrogram Client.")
@@ -13,4 +13,4 @@ def patch(client: pyrogram.Client) -> EClient:
         for arg in init_signature.keys()
         if arg != "self"
     }
-    return EClient(**client_args)
+    return Client(**client_args)
