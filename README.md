@@ -23,10 +23,11 @@ import asyncio
 base_client = Client("bot", api_id=123, api_hash="abc", ...)
 client = epyrogram.patch(base_client)
 
+user_id, chat_id = 123, 456
+
 # Use the new Client just like a normal Pyrogram client
 async def main():
     await client.start()
-    user_id, chat_id = 123, 456
     await client.send_message(chat_id, f"{user_id}, send your prompt!")
     prompt_message = await client.listen_message(
         chat_id=chat_id,
