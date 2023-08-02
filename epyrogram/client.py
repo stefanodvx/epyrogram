@@ -35,8 +35,9 @@ class Client(pyrogram.Client, Methods):
         for listener in self._listeners.values():
             if not isinstance(update, listener["type"]):
                 continue
-            if not await listener["filters"](client, update):
-                continue
+            if listener["filters"]:
+                if not await listener["filters"](client, update):
+                    continue
             future: asyncio.Future = listener["future"]
             future.set_result(update)
             return await update.stop_propagation()
